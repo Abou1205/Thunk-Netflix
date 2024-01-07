@@ -64,4 +64,4 @@ The Netflix Clone Project is a front-end web application that replicates the use
 ## Gif
 
 ![](./src/video.gif)
-# Thunk-Netflix
+
