@@ -4,8 +4,7 @@ import { useParams } from "react-router-dom";
 import { baseImgURL, options } from "../constant";
 import millify from "millify";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
-import '@splidejs/react-splide/css';
-
+import "@splidejs/react-splide/css";
 
 const DetailPage = () => {
   const [movie, setMovie] = useState(null);
@@ -16,11 +15,12 @@ const DetailPage = () => {
   // get movie data from api
   useEffect(() => {
     axios
-      .get(`/movie/${id}?append_to_response=credits,videos&language=en-US`, options)
+      .get(
+        `/movie/${id}?append_to_response=credits,videos&language=en-US`,
+        options
+      )
       .then((res) => setMovie(res.data));
   }, []);
-
-
 
   return (
     <div className="row">
@@ -33,8 +33,12 @@ const DetailPage = () => {
           {/* top */}
           <div className="col-12 banner">
             <img
-              className="img img-fluid w-100 h-100"
-              src={movie.backdrop_path ? baseImgURL + movie.backdrop_path : baseImgURL + movie.poster_path}
+              className="img img-fluid w-100 h-50"
+              src={
+                movie.backdrop_path
+                  ? baseImgURL + movie.backdrop_path
+                  : baseImgURL + movie.poster_path
+              }
             />
             <div className="banner-bg">
               <span>{movie.title}</span>
@@ -49,7 +53,10 @@ const DetailPage = () => {
 
               <div className="d-flex flex-wrap gap-4">
                 {movie.production_companies.map((i) => (
-                  <div key={i.id} className="bg-white rounded p-2 d-flex align-items-center">
+                  <div
+                    key={i.id}
+                    className="bg-white rounded p-2 d-flex align-items-center"
+                  >
                     {i.logo_path ? (
                       <img
                         className="object-fit-contain"
@@ -69,7 +76,10 @@ const DetailPage = () => {
 
               <div className="d-flex flex-wrap gap-4">
                 {movie.spoken_languages.map((i) => (
-                  <div key={i.id} className="bg-white rounded p-2 d-flex align-items-center">
+                  <div
+                    key={i.id}
+                    className="bg-white rounded p-2 d-flex align-items-center"
+                  >
                     <span className="company">{i.name}</span>
                   </div>
                 ))}
@@ -80,7 +90,10 @@ const DetailPage = () => {
 
               <div className="d-flex flex-wrap gap-4">
                 {movie.production_countries.map((i) => (
-                  <div key={i.id} className="bg-white rounded p-2 d-flex align-items-center">
+                  <div
+                    key={i.id}
+                    className="bg-white rounded p-2 d-flex align-items-center"
+                  >
                     <span className="company">{i.name}</span>
                   </div>
                 ))}
@@ -116,7 +129,7 @@ const DetailPage = () => {
               >
                 {movie.credits.cast.map((i) => (
                   <SplideSlide key={i.id}>
-                    <div  className="actor-card h-100">
+                    <div className="actor-card h-100">
                       <img
                         className="movie"
                         src={
@@ -142,17 +155,17 @@ const DetailPage = () => {
               <Splide>
                 {movie.videos.results.map((video) => (
                   <SplideSlide key={video.id}>
-                    <iframe style={{
-                      width: "100%",
-                      height: "500px"
-                    }}
+                    <iframe
+                      style={{
+                        width: "100%",
+                        height: "500px",
+                      }}
                       src={`https://www.youtube.com/embed/${video.key}`}
                     ></iframe>
                   </SplideSlide>
                 ))}
               </Splide>
             </div>
-            
           </div>
         </>
       )}
